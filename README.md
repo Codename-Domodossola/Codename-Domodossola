@@ -1,6 +1,7 @@
 # Codename Domodossola
 
 Codename Domodossola is an open distributed monitoring and automation architecture focused on:
+- full user control and operator autonomy
 - deterministic and auditable behavior
 - explicit authority boundaries
 - transport independence
@@ -10,7 +11,7 @@ Codename Domodossola is an open distributed monitoring and automation architectu
 
 The project targets heterogeneous deployments ranging from extremely constrained sensor nodes to multi-service aggregation and visualization systems.
 
-Codename Domodossola does not default to reinvention. Existing, well-established solutions are treated as primary candidates and are reused whenever compatible with system constraints and deployment context.
+Codename Domodossola does not default to reinvention. Existing, well-established solutions are treated as primary candidates and are reused whenever compatible with system constraints and deployment requirements.
 
 The architecture intentionally prioritizes:
 - explicit configuration over automatic discovery
