@@ -1,0 +1,23 @@
+Codename Domodossola Repository Licensing Notice
+
+This repository contains material under multiple licenses.
+
+Documentation:
+- /docs
+License:
+- CC BY-SA 4.0
+
+Firmware and Software:
+- /firmware
+- /tools
+License:
+- AGPLv3
+
+Hardware Designs:
+- /hardware
+License:
+- CERN-OHL-S-2.0
+
+Unless explicitly stated otherwise, licenses apply recursively within their respective directories.
+
+See the LICENSE file inside each subdirectory for the complete license text.
