@@ -7,7 +7,6 @@
 The key words MUST, MUST NOT, REQUIRED, SHOULD, SHOULD NOT, RECOMMENDED, NOT RECOMMENDED, MAY and OPTIONAL are to be interpreted as described in RFC 2119.
 
 ## 0.2 Document Hierarchy
-## 0.2 Document Hierarchy and Scope
 The document **Codename Domodossola Ethos** defines the philosophical and ethical foundations of Codename Domodossola. It is non-normative and defines no protocol behavior, architectural invariants, or implementation requirements. These are defined exclusively in the system specification documents.
 
 The Codename Domodossola System Specification consists of the following documents, with strict separation of concerns:
@@ -418,9 +417,3 @@ Interpretability depends on shared `TECH_ID` support and is enforced at deployme
 - Nodes MUST NOT negotiate TECH_IDs at runtime
 - Nodes MUST NOT modify packets in transit.
 - Nodes MAY forward packets without authentication.
-
-12345678901234567890123456789012345678901234567890
-12345678901234567890123456789012345678901234567890
-12345678901234567890123456789012345678901234567890
-12345678901234567890123456789012345678901234567890
-12345678901234567890123456789012345678901234567890
