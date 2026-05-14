@@ -6,16 +6,15 @@
 ## 0.1 Normative Language
 The key words MUST, MUST NOT, REQUIRED, SHOULD, SHOULD NOT, RECOMMENDED, NOT RECOMMENDED, MAY and OPTIONAL are to be interpreted as described in RFC 2119.
 
-## 0.2 Document Hierarchy
 ## 0.2 Document Hierarchy and Scope
-The document **Codename Domodossola Ethos** defines the philosophical and ethical foundations of Codename Domodossola. It is non-normative and defines no protocol behavior, architectural invariants, or implementation requirements. These are defined exclusively in the system specification documents.
+The document **Codename Domodossola Ethos** defines the philosophical and ethical foundations of Codename Domodossola. It is non-normative and defines no protocol behavior, architectural invariants, or implementation requirements. Those are specified in the System Specification documents below.
 
 The Codename Domodossola System Specification consists of the following documents, with strict separation of concerns:
-1. **Codename Domodossola Core Specification** (this document) <br>Defines the system model and the invariants applying across all implementations and deployments. It defines the abstract reference framework without defining technologies or deployment instances.
+1. **Codename Domodossola Core Specification** (this document) <br>Defines the system model and the invariants applying across all implementations and deployments. It defines the abstract reference model for all Codename Domodossola systems.
 2. **Codename Domodossola Core Specification Annex A: Subordinate Documents Specification** <br>Defines the normative structure and minimum required content of subordinate documents.
 3. **Codename Domodossola Technology Catalog** <br>Defines the technologies used in the system, identified by unique `TECH_ID`s, for selection in node design.
-4. **Codename Domodossola Node Implementation Catalog** <br>Defines concrete node designs, identified by unique `NODE_IMP`s, that specify coherent compositions of technologies and their realized capabilities, excluding deployment-specific concerns.
-5. **Codename Domodossola Deployment Configuration** <br>Defines a specific system instance. It records node instances identified by `UID` and the configuration choices governing a single deployment. It does not define system-wide rules.
+4. **Codename Domodossola Node Implementation Catalog** <br>Defines concrete node designs, identified by unique `NODE_IMP`s, that specify coherent compositions of technologies and their realized configurations.
+5. **Codename Domodossola Deployment Configuration** <br>Defines a specific system instance. It records node instances identified by `UID` and the configuration choices governing a single deployment.
 
 All lower-level documents MUST remain consistent with the Core Specification and MUST NOT alter or redefine its invariants.
 
@@ -31,12 +30,12 @@ Codename Domodossola is a distributed monitoring and automation architecture, as
 - KISS principle.
 
 ## 1.1 Non-Goals
-Codename Domodossola does not aim to reinvent the existing open-source home automation stack. Its purpose is to provide a more deterministic architectural framework with explicit authority boundaries and lower hardware requirements, accepting less automatic integration in exchange for tighter control and simpler deployment.
+Codename Domodossola does not aim to reinvent the existing open-source home automation stack. Its purpose is to provide a more deterministic architectural framework with explicit authority boundaries, designed for deployment environments where cloud connectivity is unavailable or undesirable.
 
 The system does not guarantee interoperability across arbitrary nodes or deployments.
 Interoperability and correctness are properties of a coherent deployment, not of protocol compliance alone. They depend on consistent configuration of `TECH_ID`s, semantic models, and node state.
 The architecture does not enforce compatibility, negotiation, or automatic cross-node validation. As a result:
-- nodes MAY be protocol-compliant yet unable to interpret each other’s data;
+- nodes MAY be protocol-compliant yet unable to interpret each other's data;
 - deployments MAY be formally valid but non-functional.
 Lack of interoperability MUST NOT result in undefined or unsafe behavior.
 This trade-off favors flexibility, explicit control, and simplicity over self-healing behavior.
@@ -281,7 +280,7 @@ Nodes MAY have no mutable L1 — Administrative state, in such cases all configu
 
 ## 5.5 Error Handling
 Error handling behaviour MAY be L0 — Hardcoded or configurable at L1 — Administrative level.
-Error handling defines the node’s response strategy to runtime errors, including (non-exhaustive):
+Error handling defines the node's response strategy to runtime errors, including (non-exhaustive):
 - silent drop;
 - local logging;
 - local or remote notification.
@@ -403,8 +402,8 @@ The available trigger mechanisms are defined by `NODE_IMP`.
 
 ## 7.4 Fragmentation
 Fragmentation is defined at two distinct levels:
-- **Construct-level fragmentation** is applied when the resulting payload plus overhead exceeds the maximum packet size. It is implemented as a `transformation TECH_ID` and produces multiple Constructs, each transmitted in a separate packet.
-- **Transport-level fragmentation** MAY be applied by the `transport TECH_ID` when a complete packet exceeds the transport MTU. It operates on opaque packet data and MUST be reversed before packet authentication.
+- **Construct-level fragmentation** is applied when the resulting payload plus overhead exceeds the maximum packet size. It is implemented as a `transformation TECH_ID` and produces multiple Constructs that MUST be reassembled before semantic interpretation.
+- **Transport-level fragmentation** MAY be applied by the `transport TECH_ID` when a complete packet exceeds the transport MTU. It operates on opaque packet data and MUST be reversed before packet authentication and interpretation.
 These mechanisms are independent and MUST NOT be conflated.
 
 ## 7.5 Interoperability
@@ -418,9 +417,3 @@ Interpretability depends on shared `TECH_ID` support and is enforced at deployme
 - Nodes MUST NOT negotiate TECH_IDs at runtime
 - Nodes MUST NOT modify packets in transit.
 - Nodes MAY forward packets without authentication.
-
-12345678901234567890123456789012345678901234567890
-12345678901234567890123456789012345678901234567890
-12345678901234567890123456789012345678901234567890
-12345678901234567890123456789012345678901234567890
-12345678901234567890123456789012345678901234567890
