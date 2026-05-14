@@ -1,6 +1,6 @@
-# Example Deployment: TP
+# Example Deployments
 
-This directory contains a reference, UID-free deployment requirements specification for Codename Domodossola. Concrete configurations with node UIDs and instance data will be added in later versions.
+This directory contains reference deployment requirements specification for Codename Domodossola. Concrete configurations with node UIDs and instance data will be added in later versions.
 
 ## Directory Contents
 - `deployment-requirements.yaml` — Specification of deployment roles, constraints, and requirements (no UIDs at this stage).
