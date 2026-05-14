@@ -87,11 +87,7 @@ A deployment is defined through:
 
 This repository uses multiple licenses depending on directory.
 
-See:
-- `LICENSE`
-- `LICENSES.md`
-
-for the complete licensing structure.
+See: `LICENSE` for the complete licensing structure.
 
 ---
 
