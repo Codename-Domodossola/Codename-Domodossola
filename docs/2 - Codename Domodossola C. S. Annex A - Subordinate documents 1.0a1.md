@@ -25,6 +25,8 @@ All `TECH_ID`s and `NODE_IMP`s:
 - MUST become immutable once they exit the Experimental lifecycle state
 - MUST require a new identifier if modified after becoming immutable
 
+Proposed entries are development-stage definitions not yet admitted to the official catalog. Temporary identifiers for Proposed entries MUST use the `0xFFXXXX` range, where `XXXX` corresponds to the proposed official identifier’s first four nibbles.
+
 New entries MAY be added without changing `MAGIC`, provided existing immutable entries remain unchanged.
 
 ---
@@ -177,7 +179,10 @@ This structure has no runtime meaning.
 0xC3XXXX  Compliance verification
 0xC4XXXX–0xCFXXXX  Reserved
 
-0xDXXXXX–0xFXXXXX  Reserved for future categories
+0xDXXXXX–0xEXXXXX  Reserved for future categories
+
+0xFXXXXX  Reserved (MUST NOT be used in the official catalog)
+0xFFXXXX  Proposed / temporary (MUST NOT be used in the official catalog)
 ```
 
 ---
@@ -355,8 +360,10 @@ This structure has no runtime meaning.
 0x74XXXX  Long-range transport infrastructure nodes
 0x75XXXX–0x7FXXXX  Reserved
 
-0x8XXXXX–0xFXXXXX  Reserved for future node classes
+0x8XXXXX–0xEXXXXX  Reserved for future node classes
 
+0xFXXXXX  Reserved (MUST NOT be used in the official catalog)
+0xFFXXXX  Proposed / temporary (MUST NOT be used in the official catalog)
 ```
 
 ---
