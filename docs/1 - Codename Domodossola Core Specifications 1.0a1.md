@@ -1,6 +1,6 @@
 # Codename Domodossola Core Specification 
 ## Version 1.0 — alpha 1
-## updated: 2026-05-10 12:30
+## updated: 2026-05-17 20:08
 
 # 0. Document Conventions
 ## 0.1 Normative Language
@@ -63,7 +63,8 @@ MUST result in a different `MAGIC` value and therefore defines a different proto
 
 ## 2.3 Lifecycle
 All `TECH_ID`s and `NODE_IMP`s MUST be assigned exactly one lifecycle state:
-- **Experimental** — MAY change or be removed without stability guarantees;
+- **Proposed** — development-stage definitions not yet admitted to the official catalog; MAY change or be removed without stability guarantees; MUST use temporary identifiers as defined in Annex A;
+- **Experimental** — officially admitted to the catalog and intended for broader review and testing; MAY change or be removed without stability guarantees;
 - **Active** — approved for deployment and intended for general use;
 - **Legacy** — SHOULD NOT be newly deployed; existing use MAY continue and SHOULD be supported by Active implementations;
 - **Retired** — MUST NOT be newly deployed; existing instances SHOULD be decommissioned or updated.
