@@ -1,7 +1,7 @@
 # Codename Domodossola Core Specifications Annex A:
 # Subordinate Documents Specification
 ## Version 1.0 — alpha 1
-## updated: 2026-05-06 23:21
+## updated: 2026-05-17 20:25
 
 ---
 
