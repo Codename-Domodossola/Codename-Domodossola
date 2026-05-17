@@ -1,0 +1,208 @@
+# Contributing to Codename Domodossola
+
+Thank you for contributing to Codename Domodossola.
+
+This repository is a governed specification and implementation workspace. Contributions are welcome, but official identifiers and catalog entries are not self-assigned.
+
+## 1. Scope of contributions
+
+Contributions may include:
+- documentation improvements
+- new or revised `TECH_ID` proposals
+- new or revised `NODE_IMP` proposals
+- firmware implementations
+- hardware implementations
+- tests, validation material, and build tooling
+- bug fixes and clarifications
+
+Contributions should preserve the existing architecture, naming discipline, and catalog governance model.
+
+## 2. Repository model
+
+Codename Domodossola uses a single repository with multiple content classes, each governed by its own license and directory rules.
+
+The repository contains:
+- documentation and normative text
+- catalog entries and their descriptive material
+- firmware and software artifacts
+- hardware and manufacturing artifacts
+- tooling and validation material
+
+The canonical meaning of `TECH_ID` and `NODE_IMP` is defined in the documentation layer, not in implementation files.
+
+## 3. Official identifiers and namespace governance
+
+Official `TECH_ID` and `NODE_IMP` values are allocated only by the project maintainer.
+
+The official namespace is tied to the project’s `MAGIC` value. A fork that establishes independent governance MUST use a different `MAGIC`.
+
+Contributors MUST NOT:
+- allocate official identifiers for themselves
+- introduce vendor-private identifier ranges
+- reserve unofficial namespace blocks for future use
+- represent temporary local identifiers as official catalog entries
+
+## 4. Proposed entries and temporary identifiers
+
+During design and implementation work, contributors may create **Proposed** entries to allow a bundle of technologies and node implementations to interact before formal review.
+
+A Proposed entry is:
+- development-stage
+- not yet admitted to the official catalog
+- subject to change
+- intended for local testing and review
+
+Temporary identifiers for Proposed entries MUST use the `0xFFXXXX` range, where `XXXX` corresponds to the proposed official identifier’s first four nibbles.
+
+Temporary identifiers are:
+- for development only
+- not part of the official catalog
+- not valid as final identifiers
+- replaceable at any time
+- subject to renaming by the maintainer before acceptance
+
+## 5. Lifecycle model
+
+Every `TECH_ID` and `NODE_IMP` follows the project lifecycle.
+
+The lifecycle is:
+
+- Proposed
+- Experimental
+- Active
+- Legacy
+- Retired
+
+### Proposed
+Proposed entries are development-stage definitions not yet admitted to the official catalog. They use temporary identifiers in the `0xFFXXXX` range.
+
+### Experimental
+Experimental entries are officially admitted to the catalog but MAY change or be removed without stability guarantees.
+
+### Active
+Active entries are approved for deployment and intended for general use.
+
+### Legacy
+Legacy entries SHOULD NOT be newly deployed; existing use MAY continue and SHOULD be supported by Active implementations.
+
+### Retired
+Retired entries MUST NOT be newly deployed; existing instances SHOULD be decommissioned or updated.
+
+Once an entry exits Experimental status:
+- its definition is frozen
+- material changes require a new identifier
+- the previous identifier remains immutable
+
+A material change includes, for example:
+- behavior
+- interfaces
+- semantics
+- hardware composition
+- firmware build definition
+- manufacturing definition
+- packaging definition
+- attribute bindings
+- reproducibility fingerprint
+
+## 6. What to submit
+
+A contribution that introduces or changes a catalog entry should include:
+
+- the proposed identifier or temporary identifier
+- the human-readable name
+- the descriptive rationale
+- the relevant specification text
+- the implementation artifacts, if applicable
+- the hardware specification, if applicable
+- the firmware build and reproducibility material, if applicable
+- the known limitations and bugs
+
+If the contribution proposes a new `NODE_IMP`, it should also identify:
+- the associated `TECH_ID`s
+- the hardware revision or manufacturing snapshot
+- the firmware hash or build result
+- the hardware specification fingerprint, when relevant
+
+## 7. Submission workflow
+
+Before opening a pull request:
+1. create or update the relevant Proposed material
+2. keep temporary identifiers local to the branch or draft
+3. ensure the proposed bundle is internally coherent
+4. ensure the proposed bundle does not conflict with existing official entries
+5. prepare the descriptive text and implementation artifacts separately
+
+During review, maintainers may:
+- rename identifiers
+- split or merge entries
+- request more detail
+- request reproducibility evidence
+- request hardware clarification
+- request catalog restructuring
+
+Do not assume that a proposal will keep its temporary names or its original structure.
+
+## 8. Review criteria
+
+A contribution is easier to accept when it is:
+- clear
+- internally consistent
+- minimal
+- reproducible
+- aligned with existing catalog structure
+- compatible with the Core Specification and Annex A
+- explicit about dependencies and assumptions
+
+A contribution may be rejected or revised if it:
+- introduces unnecessary reinvention
+- duplicates an existing solution without clear justification
+- weakens determinism or auditability
+- relies on hidden assumptions
+- blurs the distinction between Proposed and official identifiers
+- conflicts with the namespace or lifecycle rules
+
+## 9. Experimental bundles
+
+It is acceptable to develop a bundle of interacting `TECH_ID`s and `NODE_IMP`s as Proposed material before official allocation.
+
+Such bundles should be treated as working drafts.
+
+The maintainer may accept part of a bundle, split it, rename it, or replace temporary identifiers with official ones. Proposed work should therefore be written so that renaming is easy and does not break the structure of the proposal.
+
+## 10. Forks
+
+Forking is permitted.
+
+A fork may:
+- continue development
+- modify the repository
+- establish its own governance
+- create its own identifier namespace
+
+A fork that does so MUST adopt a different `MAGIC`.
+
+A fork should not present itself as the canonical Codename Domodossola project unless it remains under the canonical maintainer governance and namespace.
+
+## 11. Licensing boundaries
+
+Different repository paths may use different licenses.
+
+Contributors should read the license file in the relevant directory before submitting changes there.
+
+If a contribution spans multiple license domains, it should be structured so that each part remains clearly attributable to the correct directory and license.
+
+## 12. Practical contribution notes
+
+Prefer small, reviewable pull requests.
+
+When in doubt:
+- propose the minimal change
+- preserve existing identifiers
+- keep descriptive text and implementation artifacts aligned
+- make explicit whether a file is Proposed or frozen
+
+## 13. Final note
+
+The project values clarity, explicit boundaries, and reproducible structure.
+
+If a contribution is technically useful but does not yet fit the official namespace, it may still be useful as Proposed material. The maintainer will decide whether it becomes part of the catalog, and under which official identifier.
