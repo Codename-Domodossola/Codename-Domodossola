@@ -104,7 +104,28 @@ A material change includes, for example:
 - attribute bindings
 - reproducibility fingerprint
 
-## 6. What to submit
+## 6. Immutable entries and bug fixes
+
+Once a `TECH_ID` or `NODE_IMP` exits the Experimental lifecycle state, its technical definition is frozen.
+
+Bug fixes, behavioral changes, implementation replacements, or compatibility corrections for frozen entries MUST be implemented through allocation of a new identifier rather than through modification of the existing entry.
+
+GitHub Issues SHOULD be used to track:
+- defects
+- incompatibilities
+- operational limitations
+- proposed corrections
+- replacement discussions
+
+A correction workflow will typically:
+1. open or reference an Issue;
+2. introduce a new Proposed entry implementing the correction;
+3. review and allocate an official identifier;
+4. transition the previous identifier to Legacy or Retired if appropriate.
+
+Lifecycle transitions do not modify the technical definition of an entry.
+
+## 7. What to submit
 
 A contribution that introduces or changes a catalog entry should include:
 
@@ -123,7 +144,7 @@ If the contribution proposes a new `NODE_IMP`, it should also identify:
 - the firmware hash or build result
 - the hardware specification fingerprint, when relevant
 
-## 7. Submission workflow
+## 8. Submission workflow
 
 Before opening a pull request:
 1. create or update the relevant Proposed material
@@ -142,7 +163,7 @@ During review, maintainers may:
 
 Do not assume that a proposal will keep its temporary names or its original structure.
 
-## 8. Review criteria
+## 9. Review criteria
 
 A contribution is easier to accept when it is:
 - clear
@@ -161,7 +182,7 @@ A contribution may be rejected or revised if it:
 - blurs the distinction between Proposed and official identifiers
 - conflicts with the namespace or lifecycle rules
 
-## 9. Experimental bundles
+## 10. Experimental bundles
 
 It is acceptable to develop a bundle of interacting `TECH_ID`s and `NODE_IMP`s as Proposed material before official allocation.
 
@@ -169,7 +190,7 @@ Such bundles should be treated as working drafts.
 
 The maintainer may accept part of a bundle, split it, rename it, or replace temporary identifiers with official ones. Proposed work should therefore be written so that renaming is easy and does not break the structure of the proposal.
 
-## 10. Forks
+## 11. Forks
 
 Forking is permitted.
 
@@ -183,7 +204,7 @@ A fork that does so MUST adopt a different `MAGIC`.
 
 A fork should not present itself as the canonical Codename Domodossola project unless it remains under the canonical maintainer governance and namespace.
 
-## 11. Licensing boundaries
+## 12. Licensing boundaries
 
 Different repository paths may use different licenses.
 
@@ -191,7 +212,7 @@ Contributors should read the license file in the relevant directory before submi
 
 If a contribution spans multiple license domains, it should be structured so that each part remains clearly attributable to the correct directory and license.
 
-## 12. Practical contribution notes
+## 13. Practical contribution notes
 
 Prefer small, reviewable pull requests.
 
@@ -201,7 +222,7 @@ When in doubt:
 - keep descriptive text and implementation artifacts aligned
 - make explicit whether a file is Proposed or frozen
 
-## 13. Final note
+## 14. Final note
 
 The project values clarity, explicit boundaries, and reproducible structure.
 
