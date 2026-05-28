@@ -14,21 +14,21 @@ https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main
 
 ## docs
 https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/.gitkeep
-https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/0 - Codename Domodossola Ethos .md
-https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/1 - Codename Domodossola Core Specifications 1.0a1.md
-https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/2 - Codename Domodossola C. S. Annex A - Subordinate documents 1.0a1.md
+https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/0%20-%20Codename%20Domodossola%20Ethos%20.md
+https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/1%20-%20Codename%20Domodossola%20Core%20Specifications%201.0a1.md
+https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/2%20-%20Codename%20Domodossola%20C.%20S.%20Annex%20A%20-%20Subordinate%20documents%201.0a1.md
 https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/LICENSE
 
 ## docs/examples
 https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/examples/README.md
 
 ## docs/examples/TP
-https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/examples/TP/TP deployment requirements.md
+https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/examples/TP/TP%20deployment%20requirements.md
 
 ## docs/notes
-https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/notes/2026-05-20-AI Coder instruction.txt
-https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/notes/2026-05-20-AI Guardian instruction.txt
-https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/notes/2026-05-20-git workflow.txt
+https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/notes/2026-05-20-AI%20Coder%20instruction.txt
+https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/notes/2026-05-20-AI%20Guardian%20instruction.txt
+https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/notes/2026-05-20-git%20workflow.txt
 
 ## hardware
 https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/hardware/.gitkeep
