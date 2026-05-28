@@ -14,7 +14,7 @@ https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main
 
 ## docs
 https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/.gitkeep
-https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/0%20-%20Codename%20Domodossola%20Ethos%20.md
+https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/0%20-%20Codename%20Domodossola%20Ethos.md
 https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/1%20-%20Codename%20Domodossola%20Core%20Specifications%201.0a1.md
 https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/2%20-%20Codename%20Domodossola%20C.%20S.%20Annex%20A%20-%20Subordinate%20documents%201.0a1.md
 https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/LICENSE
