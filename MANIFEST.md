@@ -14,16 +14,16 @@ https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main
 
 ## docs
 https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/.gitkeep
-https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/0%20-%20Codename%20Domodossola%20Ethos.md
-https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/1%20-%20Codename%20Domodossola%20Core%20Specifications%201.0a1.md
-https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/2%20-%20Codename%20Domodossola%20C.%20S.%20Annex%20A%20-%20Subordinate%20documents%201.0a1.md
+https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/0-Codename_Domodossola_Ethos.md
+https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/1-Codename_Domodossola_Core_Specifications_1.0a1.md
+https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/2-Codename_Domodossola_C_S_Annex_A-Subordinate_documents_1.0a1.md
 https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/LICENSE
 
 ## docs/examples
 https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/examples/README.md
 
 ## docs/examples/TP
-https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/examples/TP/TP%20deployment%20requirements.md
+https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/examples/TP/TP_deployment_requirements.md
 
 ## docs/notes
 https://raw.githubusercontent.com/Codename-Domodossola/Codename-Domodossola/main/docs/notes/2026-05-20-AI%20Coder%20instruction.txt
