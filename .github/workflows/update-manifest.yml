@@ -37,7 +37,7 @@ jobs:
                 echo "## ${dir}"
                 prev_dir="$dir"
               fi
-              echo "${BASE}/${f}"
+              echo "${BASE}/${f}" | sed 's/ /%20/g'
             done
           } > MANIFEST.md
 
