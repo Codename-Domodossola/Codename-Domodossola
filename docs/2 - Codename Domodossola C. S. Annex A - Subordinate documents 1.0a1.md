@@ -19,19 +19,32 @@ All subordinate documents:
 
 The Technology Catalog and Node Implementation Catalog define and allocate identifiers under the single Codename Domodossola namespace associated with `MAGIC = 0xC3D94F` (§2.2).
 
-All `TECH_ID`s and `NODE_IMP`s:
+A catalog entry MAY define one or more catalog items.
 
-- MUST belong to exactly one lifecycle state (§2.3)
-- MUST become immutable once they exit the Experimental lifecycle state
+Catalog items contained in the same catalog entry MUST be strictly related. In practice, this means they MUST:
+- share the first 16 bits of the identifier
+- belong to the same category
+- share the same design intent
+- represent the same broad functional family
+- differ only by version, parameterization, capacity, revision, or similarly bounded variation
+
+Each catalog item MUST have:
+- a unique `TECH_ID` or `NODE_IMP`
+- exactly one lifecycle state (§2.3)
+
+Each catalog item:
+- MUST become immutable once it exits the Experimental lifecycle state
 - MUST require a new identifier if modified after becoming immutable
 
-Proposed entries are development-stage definitions not yet admitted to the official catalog. Temporary identifiers for Proposed entries MUST use the `0xFFXXXX` range, where `XXXX` corresponds to the proposed official identifier’s first four nibbles.
+A catalog entry MAY include common sections shared by multiple catalog items, but each contained item MUST be clearly identified and normatively distinguishable from the others.
 
-New entries MAY be added without changing `MAGIC`, provided existing immutable entries remain unchanged.
+Proposed catalog items are development-stage definitions not yet admitted to the official catalog. Temporary identifiers for Proposed items MUST use the `0xFFXXXX` range, where `XXXX` corresponds to the proposed official identifier’s first four nibbles.
+
+New catalog items MAY be added without changing `MAGIC`, provided existing immutable items remain unchanged.
 
 Defect correction, behavioral modification, or implementation replacement for an immutable `TECH_ID` or `NODE_IMP` MUST be performed through allocation of a new identifier.
 
-Lifecycle state transitions do not modify the technical definition of an entry and MAY occur without changing the identifier.
+Lifecycle state transitions do not modify the technical definition of a catalog item and MAY occur without changing the identifier.
 
 ---
 
@@ -201,6 +214,14 @@ Each `TECH_ID` entry is defined by:
 The catalog entry is authoritative.
 Implementation artifacts MUST NOT redefine normative behavior independently from the catalog entry.
 
+For each catalog item, the normative definition consists of:
+
+- the shared catalog entry definition;
+- the item-specific definitions contained in the Items list and Items variation summary;
+- all referenced implementation artifacts applicable to that item.
+
+Where item-specific definitions conflict with shared catalog entry definitions, the item-specific definitions take precedence for that catalog item.
+
 ---
 
 ### Normative Catalog Entry (in `/docs`)
@@ -209,33 +230,40 @@ The normative catalog entry MUST include:
 
 #### 1. Identification
 - `MAGIC`
-- `TECH_ID`
+- first 16 bits of `TECH_ID`
 - human-readable name
 - catalog summary (≤ 300 characters, non-normative)
+
+#### 2. Items list
+Compact table containing, for each item:
+- `TECH_ID`
+- human-readable name suffix
+- catalog summary detail (≤ 50 characters, non-normative)
 - lifecycle state (§2.3)
 
-#### 2. Design Definition
+#### 3. Design Definition
 - purpose
 - design choices
 - trade-offs
 - limitations
 
-#### 3. System Assumptions
+#### 4. System Assumptions
 - operational assumptions
 - environmental assumptions
 - dependency assumptions
 
-#### 4. Composition Definition (§4.3)
-- included `TECH_ID`s
-- dependency constraints
+#### 5. Composition Definition (§4.3)
+- imported `TECH_ID` list
+- dependency relationships
+- composition constraints
 
-#### 5. Attribute Model (§4.2)
+#### 6. Attribute Model (§4.2)
 - inherited attributes (if applicable)
 - exposed attributes
 - value domains
 
-#### 6. Functional Interface
-Each `TECH_ID` MUST define the complete firmware-facing API:
+#### 7. Functional Interface
+the complete firmware-facing API:
 
 - function signatures
 - input constraints
@@ -245,7 +273,7 @@ Each `TECH_ID` MUST define the complete firmware-facing API:
 
 These functions define the only valid interaction surface between firmware and the technology.
 
-#### 7. Artifact References
+#### 8. Artifact References
 The catalog entry MUST reference all implementation artifacts required to fully define the technology.
 
 Referenced artifacts MAY include:
@@ -257,6 +285,9 @@ Referenced artifacts MAY include:
 - upstream external technologies
 
 Artifact references SHOULD include immutable fingerprints or hashes where applicable.
+
+#### 9. Items variation summary
+Full list of all item-specific variations.
 
 ---
 
@@ -294,6 +325,7 @@ Hardware and manufacturing artifacts MAY include:
 - PCB layouts
 - BOMs
 - enclosure definitions
+- 2D drawings
 - 3D models
 - manufacturing packages
 - assembly documentation
@@ -364,7 +396,7 @@ Within the catalog, allocation is internally structured as:
 
 - first 8 bits: node category
 - middle 8 bits: architectural design space
-- last 8 bits: hardware / firmware revision space
+- last 8 bits: hardware / firmware variation space
 
 This structure has no runtime meaning.
 
@@ -449,6 +481,14 @@ Each `NODE_IMP` entry is defined by:
 The catalog entry is authoritative.
 Implementation artifacts MUST NOT redefine normative behavior independently from the catalog entry.
 
+For each catalog item, the normative definition consists of:
+
+- the shared catalog entry definition;
+- the item-specific definitions contained in the Items list and Items variation summary;
+- all referenced implementation artifacts applicable to that item.
+
+Where item-specific definitions conflict with shared catalog entry definitions, the item-specific definitions take precedence for that catalog item.
+
 ---
 
 ### Normative Catalog Entry (in `/docs`)
@@ -457,32 +497,43 @@ The normative catalog entry MUST include:
 
 #### 1. Identification
 - `MAGIC`
-- `NODE_IMP`
+- first 16 bits of `NODE_IMP`
 - human-readable name
 - catalog summary (≤ 300 characters, non-normative)
+
+#### 2. Items list
+Compact table containing, for each item:
+- `NODE_IMP`
+- human-readable name suffix
+- catalog summary detail (≤ 50 characters, non-normative)
 - lifecycle state (§2.3)
 
-#### 2. Design Definition
+#### 3. Design Definition
 - architectural intent
 - design choices
 - trade-offs
 - constraints
 
-#### 3. Technology Composition (§4.3)
+#### 4. System Assumptions
+- operational assumptions
+- environmental assumptions
+- dependency assumptions
+
+#### 5. Technology Composition (§4.3)
 - `TECH_ID` list
 - dependency relationships
 - composition constraints
 
-#### 4. Attribute Bindings
+#### 6. Attribute Bindings
 - attribute trust levels
 - propagated constraints
 
-#### 5. Execution Model
+#### 7. Execution Model
 Firmware SHOULD structure behavior primarily through invocation of `TECH_ID` defined interfaces, and MAY also use:
 - conditional logic
 - variable state management
 
-#### 6. Artifact References
+#### 8. Artifact References
 The catalog entry MUST reference all implementation artifacts required to fully define the node implementation.
 
 Referenced artifacts MAY include:
@@ -493,6 +544,9 @@ Referenced artifacts MAY include:
 - reproducibility tooling
 
 Artifact references SHOULD include immutable fingerprints or hashes where applicable.
+
+#### 9. Items variation summary
+Full list of all item-specific variations.
 
 ---
 
@@ -531,6 +585,7 @@ Hardware and manufacturing artifacts MAY include:
 - PCB layouts
 - BOMs
 - enclosure definitions
+- 2D drawings
 - 3D models
 - manufacturing packages
 - assembly documentation
@@ -542,7 +597,7 @@ Hardware definitions MUST include:
 - power systems
 - physical constraints
 - revision mapping
-- enclosure
+- enclosure design 
 - environmental constraints
 - mechanical integration
 
@@ -567,7 +622,7 @@ The Node Implementation Catalog MUST provide a complete index containing:
 
 # A.3 Deployment Configuration
 
-A Deployment Configuration defines one concrete system instance, where each entey is a node identified by `UID` (§3.7).
+A Deployment Configuration defines one concrete system instance, where each entry is a node identified by `UID` (§3.7).
 
 Each deployment entry defines one node and MUST include:
 

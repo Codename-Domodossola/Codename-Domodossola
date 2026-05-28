@@ -70,7 +70,7 @@ All `TECH_ID`s and `NODE_IMP`s MUST be assigned exactly one lifecycle state:
 - **Retired** — MUST NOT be newly deployed; existing instances SHOULD be decommissioned or updated.
 
 Lifecycle state is a catalog-level concept and MUST NOT influence runtime behavior or be inferred or modified by system operation.
-Each `TECH_ID` and each `NODE_IMP` becomes immutable once it exit the `Experimental` lifecycle state. After this point:
+Each `TECH_ID` and each `NODE_IMP` becomes immutable once it exits the `Experimental` lifecycle state. After this point:
 - it MUST NOT be modified;
 - it MUST NOT be removed;
 - new `TECH_ID`s and `NODE_IMP`s MAY be added.
