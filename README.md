@@ -40,7 +40,7 @@ This repository contains:
   - catalogs
   - reference documents
 
-- `/firmware`
+- `/software`
   - firmware implementations
   - software tooling
   - tests
@@ -53,7 +53,7 @@ This repository contains:
   - manufacturing files
   - enclosure definitions
 
-- `/tools`
+- `/*/tools`
   - development utilities
   - validation tools
   - auxiliary tooling

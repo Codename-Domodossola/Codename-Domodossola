@@ -19,15 +19,32 @@ All subordinate documents:
 
 The Technology Catalog and Node Implementation Catalog define and allocate identifiers under the single Codename Domodossola namespace associated with `MAGIC = 0xC3D94F` (§2.2).
 
-All `TECH_ID`s and `NODE_IMP`s:
+A catalog entry MAY define one or more catalog items.
 
-- MUST belong to exactly one lifecycle state (§2.3)
-- MUST become immutable once they exit the Experimental lifecycle state
+Catalog items contained in the same catalog entry MUST be strictly related. In practice, this means they MUST:
+- share the first 16 bits of the identifier
+- belong to the same category
+- share the same design intent
+- represent the same broad functional family
+- differ only by version, parameterization, capacity, revision, or similarly bounded variation
+
+Each catalog item MUST have:
+- a unique `TECH_ID` or `NODE_IMP`
+- exactly one lifecycle state (§2.3)
+
+Each catalog item:
+- MUST become immutable once it exits the Experimental lifecycle state
 - MUST require a new identifier if modified after becoming immutable
 
-Proposed entries are development-stage definitions not yet admitted to the official catalog. Temporary identifiers for Proposed entries MUST use the `0xFFXXXX` range, where `XXXX` corresponds to the proposed official identifier’s first four nibbles.
+A catalog entry MAY include common sections shared by multiple catalog items, but each contained item MUST be clearly identified and normatively distinguishable from the others.
 
-New entries MAY be added without changing `MAGIC`, provided existing immutable entries remain unchanged.
+Proposed catalog items are development-stage definitions not yet admitted to the official catalog. Temporary identifiers for Proposed items MUST use the `0xFFXXXX` range, where `XXXX` corresponds to the proposed official identifier’s first four nibbles.
+
+New catalog items MAY be added without changing `MAGIC`, provided existing immutable items remain unchanged.
+
+Defect correction, behavioral modification, or implementation replacement for an immutable `TECH_ID` or `NODE_IMP` MUST be performed through allocation of a new identifier.
+
+Lifecycle state transitions do not modify the technical definition of a catalog item and MAY occur without changing the identifier.
 
 ---
 
@@ -189,64 +206,150 @@ This structure has no runtime meaning.
 
 ## A.1.3 Entry Requirements
 
-Each entry MUST include:
+Each `TECH_ID` entry is defined by:
 
-1. Identification
-   - `MAGIC`
-   
-   For each defined `TECH_ID`:
-   - `TECH_ID`
-   - human-readable name
-   - catalog summary (≤ 300 characters, non-normative)
-   - lifecycle state (§2.3)
+- a normative catalog entry contained in the documentation layer;
+- zero or more referenced implementation artifacts contained in implementation directories.
 
-2. Design Rationale
-   - purpose
-   - design choices
-   - trade-offs
-   - limitations
+The catalog entry is authoritative.
+Implementation artifacts MUST NOT redefine normative behavior independently from the catalog entry.
 
-3. System Assumptions
-   - operational assumptions
-   - environmental assumptions
-   - dependency assumptions
+For each catalog item, the normative definition consists of:
 
-4. Composition Definition (§4.3)
-   - included `TECH_ID`s
-   - dependency constraints
+- the shared catalog entry definition;
+- the item-specific definitions contained in the Items list and Items variation summary;
+- all referenced implementation artifacts applicable to that item.
 
-5. Attribute Model (§4.2)
-   - inherited attributes (if applicable)
-   - exposed attributes
-   - value domains
+Where item-specific definitions conflict with shared catalog entry definitions, the item-specific definitions take precedence for that catalog item.
 
-6. Functional Interface
-   Each `TECH_ID` MUST define the complete firmware-facing API:
+---
 
-   - function signatures
-   - input constraints
-   - output guarantees
-   - error conditions
-   - determinism requirements
+### Normative Catalog Entry (in `/docs`)
 
-   These functions define the only valid interaction surface between firmware and the technology.
+The normative catalog entry MUST include:
 
-7. Hardware Specification (if applicable)
-   - components
-   - electrical characteristics
-   - vendor references
+#### 1. Identification
+- `MAGIC`
+- first 16 bits of `TECH_ID`
+- human-readable name
+- catalog summary (≤ 300 characters, non-normative)
 
-8. External Technology Wrappers (if applicable)
-   - Codename Domodossola interface definition
-   - upstream reference documentation
-   - explicit semantic mapping
+#### 2. Items list
+Compact table containing, for each item:
+- `TECH_ID`
+- human-readable name suffix
+- catalog summary detail (≤ 50 characters, non-normative)
+- lifecycle state (§2.3)
 
-9. Known Bugs
-   - bug descriptions
-   - severity classification
-   - lifecycle impact
+#### 3. Design Definition
+- purpose
+- design choices
+- trade-offs
+- limitations
 
-   This is the only permanently mutable section and MAY evolve after the `TECH_ID` becomes immutable.
+#### 4. System Assumptions
+- operational assumptions
+- environmental assumptions
+- dependency assumptions
+
+#### 5. Composition Definition (§4.3)
+- imported `TECH_ID` list
+- dependency relationships
+- composition constraints
+
+#### 6. Attribute Model (§4.2)
+- inherited attributes (if applicable)
+- exposed attributes
+- value domains
+
+#### 7. Functional Interface
+the complete firmware-facing API:
+
+- function signatures
+- input constraints
+- output guarantees
+- error conditions
+- determinism requirements
+
+These functions define the only valid interaction surface between firmware and the technology.
+
+#### 8. Artifact References
+The catalog entry MUST reference all implementation artifacts required to fully define the technology.
+
+Referenced artifacts MAY include:
+- firmware implementations
+- hardware specifications
+- manufacturing artifacts
+- test artifacts
+- reproducibility tooling
+- upstream external technologies
+
+Artifact references SHOULD include immutable fingerprints or hashes where applicable.
+
+#### 9. Items variation summary
+Full list of all item-specific variations.
+
+---
+
+### Software Artifacts (in `/software`)
+
+Firmware and software artifacts MAY include:
+
+- source code
+- build definitions
+- reproducible build tooling
+- validation tooling
+- test harnesses
+- generated binaries
+
+Firmware definitions MUST include:
+- build procedure
+- reproducibility constraints
+
+Firmware artifacts MUST be deterministically reproducible unless explicitly justified as depending on externally non-reproducible tooling.
+
+Firmware artifacts SHOULD define:
+- source revision bindings
+- build environment constraints
+- resulting binary hashes
+
+Firmware and tooling artifacts MUST remain semantically consistent with the normative catalog entry.
+
+---
+
+### Hardware / Manufacturing Artifacts (in `/hardware`)
+
+Hardware and manufacturing artifacts MAY include:
+
+- schematics
+- PCB layouts
+- BOMs
+- enclosure definitions
+- 2D drawings
+- 3D models
+- manufacturing packages
+- assembly documentation
+
+Hardware definitions MUST include:
+- components
+- electrical characteristics
+- vendor references
+
+Hardware artifacts SHOULD define deterministic manufacturing references or fingerprints, including where applicable:
+- BOM hashes
+- PCB manufacturing package hashes
+- revision mappings
+
+Hardware artifacts MUST remain semantically consistent with the normative catalog entry.
+
+---
+
+### External Technology Wrappers (if applicable, in `/software` or `/hardware`)
+
+External technology wrappers MUST define:
+- Codename Domodossola interface definition
+- upstream reference documentation
+- explicit semantic mapping
 
 ---
 
@@ -293,7 +396,7 @@ Within the catalog, allocation is internally structured as:
 
 - first 8 bits: node category
 - middle 8 bits: architectural design space
-- last 8 bits: hardware / firmware revision space
+- last 8 bits: hardware / firmware variation space
 
 This structure has no runtime meaning.
 
@@ -370,61 +473,140 @@ This structure has no runtime meaning.
 
 ## A.2.3 Entry Requirements
 
-Each entry MUST include:
+Each `NODE_IMP` entry is defined by:
 
-1. Identification
-   - `MAGIC`
-   
-   For each defined `NODE_IMP`:
-   - `NODE_IMP`
-   - human-readable name
-   - catalog summary (≤ 300 characters, non-normative)
-   - lifecycle state (§2.3)
+- a normative catalog entry contained in the documentation layer;
+- zero or more referenced implementation artifacts contained in implementation directories.
 
-2. Design Rationale
-   - architectural intent
-   - design choices
-   - trade-offs
-   - constraints
+The catalog entry is authoritative.
+Implementation artifacts MUST NOT redefine normative behavior independently from the catalog entry.
 
-3. Technology Composition (§4.3)
-   - `TECH_ID` list
-   - dependency relationships
-   - composition constraints
+For each catalog item, the normative definition consists of:
 
-4. Firmware Definition
-   - source reference
-   - build procedure
-   - binary hash binding
-   - reproducibility constraints
+- the shared catalog entry definition;
+- the item-specific definitions contained in the Items list and Items variation summary;
+- all referenced implementation artifacts applicable to that item.
 
-5. Hardware Specification
-   - MCU / substrate
-   - peripherals
-   - power systems
-   - physical constraints
-   - revision mapping
+Where item-specific definitions conflict with shared catalog entry definitions, the item-specific definitions take precedence for that catalog item.
 
-6. Packaging Specification
-   - enclosure
-   - environmental constraints
-   - mechanical integration
+---
 
-7. Attribute Bindings
-   - attribute trust levels
-   - propagated constraints
+### Normative Catalog Entry (in `/docs`)
 
-8. Execution Model
-   Firmware SHOULD structure behavior primarily through invocation of `TECH_ID` defined interfaces, and MAY also use:
-   - conditional logic
-   - variable state management
+The normative catalog entry MUST include:
 
-9. Known Bugs
-   - bug descriptions
-   - severity classification
-   - lifecycle impact
+#### 1. Identification
+- `MAGIC`
+- first 16 bits of `NODE_IMP`
+- human-readable name
+- catalog summary (≤ 300 characters, non-normative)
 
-   This is the only permanently mutable section and MAY evolve after the `NODE_IMP` becomes immutable.
+#### 2. Items list
+Compact table containing, for each item:
+- `NODE_IMP`
+- human-readable name suffix
+- catalog summary detail (≤ 50 characters, non-normative)
+- lifecycle state (§2.3)
+
+#### 3. Design Definition
+- architectural intent
+- design choices
+- trade-offs
+- constraints
+
+#### 4. System Assumptions
+- operational assumptions
+- environmental assumptions
+- dependency assumptions
+
+#### 5. Technology Composition (§4.3)
+- `TECH_ID` list
+- dependency relationships
+- composition constraints
+
+#### 6. Attribute Bindings
+- attribute trust levels
+- propagated constraints
+
+#### 7. Execution Model
+Firmware SHOULD structure behavior primarily through invocation of `TECH_ID` defined interfaces, and MAY also use:
+- conditional logic
+- variable state management
+
+#### 8. Artifact References
+The catalog entry MUST reference all implementation artifacts required to fully define the node implementation.
+
+Referenced artifacts MAY include:
+- firmware implementations
+- hardware specifications
+- manufacturing artifacts
+- test artifacts
+- reproducibility tooling
+
+Artifact references SHOULD include immutable fingerprints or hashes where applicable.
+
+#### 9. Items variation summary
+Full list of all item-specific variations.
+
+---
+
+### Firmware / Software Artifacts (in `/software`)
+
+Firmware and software artifacts MAY include:
+
+- source code
+- build definitions
+- reproducible build tooling
+- validation tooling
+- deployment tooling
+- generated binaries
+
+Firmware definitions MUST include:
+- source code
+- build procedure
+- reproducibility constraints
+
+Firmware MUST be deterministically reproducible.
+
+Firmware artifacts SHOULD define:
+- source revision bindings
+- build environment constraints
+- resulting binary hashes
+
+Firmware and tooling artifacts MUST remain semantically consistent with the normative catalog entry.
+
+---
+
+### Hardware / Manufacturing Artifacts (`/hardware`)
+
+Hardware and manufacturing artifacts MAY include:
+
+- schematics
+- PCB layouts
+- BOMs
+- enclosure definitions
+- 2D drawings
+- 3D models
+- manufacturing packages
+- assembly documentation
+- mechanical integration files
+
+Hardware definitions MUST include:
+- MCU / substrate
+- peripherals
+- power systems
+- physical constraints
+- revision mapping
+- enclosure design 
+- environmental constraints
+- mechanical integration
+
+Hardware artifacts SHOULD define deterministic manufacturing references or fingerprints, including where applicable:
+- BOM hashes
+- PCB manufacturing package hashes
+- assembly constraints
+
+Hardware artifacts MUST remain semantically consistent with the normative catalog entry.
 
 ---
 
@@ -440,7 +622,7 @@ The Node Implementation Catalog MUST provide a complete index containing:
 
 # A.3 Deployment Configuration
 
-A Deployment Configuration defines one concrete system instance, where each entey is a node identified by `UID` (§3.7).
+A Deployment Configuration defines one concrete system instance, where each entry is a node identified by `UID` (§3.7).
 
 Each deployment entry defines one node and MUST include:
 
