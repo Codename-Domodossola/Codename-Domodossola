@@ -16,3 +16,5 @@ git push -u origin feature-branch
 git checkout main
 git pull
 git branch -d feature-branch
+
+sh bundle.sh

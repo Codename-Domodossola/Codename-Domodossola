@@ -3,18 +3,29 @@
 
 TIMESTAMP=$(date +"%Y%m%d-%H%M%S")
 BUNDLE_FILE="bundle-${TIMESTAMP}.txt"
-
+files=$(
 find . -type f \
   ! -path './.git/*' \
   ! -name 'bundle.txt' \
   ! -name 'bundle-*.txt' \
   ! -name 'bundle.sh' \
-  | sort | while read f; do
-    echo "================================================================"
+  | sort
+)
+
+{
+echo "==========================================="
+echo "FILE LIST"
+echo "==========================================="
+printf '%s\n' "$files"
+echo
+}  > "$BUNDLE_FILE"
+
+printf '%s\n' "$files" | while read -r f; do
+    echo "==========================================="
     echo "FILE: $f"
-    echo "================================================================"
+    echo "==========================================="
     cat "$f"
     echo ""
-done > "$BUNDLE_FILE"
+done >> "$BUNDLE_FILE"
 
 echo "$BUNDLE_FILE ready."
