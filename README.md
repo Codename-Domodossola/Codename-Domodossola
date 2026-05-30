@@ -36,9 +36,12 @@ This repository contains:
 ### Main directories
 
 - `/docs`
-  - specifications
-  - catalogs
+  - system specification documents
+  - technology catalog entries
+  - node implementation catalog entries
   - reference documents
+  - `examples/` — non-normative illustrative deployment material
+  - `notes/` — working notes and tooling instructions
 
 - `/software`
   - firmware implementations
@@ -57,6 +60,18 @@ This repository contains:
   - development utilities
   - validation tools
   - auxiliary tooling
+
+---
+
+## Specifications
+
+| Document | Role |
+|---|---|
+| [Ethos](docs/0-Codename_Domodossola_Ethos.md) | Non-normative. Design philosophy and intent. |
+| [Core Specification](docs/1-Codename_Domodossola_Core_Specifications_1.0a1.md) | Primary normative source. System model, entities, security, interaction. |
+| [Annex A — Subordinate Documents](docs/2-Codename_Domodossola_C_S_Annex_A-Subordinate_documents_1.0a1.md) | Normative. Format and content requirements for all catalog and configuration documents. |
+
+Technology Catalog and Node Implementation Catalog entries will appear in `/docs` as the project develops.
 
 ---
 

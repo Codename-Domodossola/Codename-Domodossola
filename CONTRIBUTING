@@ -212,7 +212,23 @@ Contributors should read the license file in the relevant directory before submi
 
 If a contribution spans multiple license domains, it should be structured so that each part remains clearly attributable to the correct directory and license.
 
-## 13. Practical contribution notes
+## 13. Deployment configuration examples
+
+Real-world deployment configurations are private by default.
+
+The `docs/examples/` directory exists for voluntarily contributed, anonymised examples. A contribution to this directory:
+
+- MUST contain no real site-identifying information;
+- MUST contain no real cryptographic material, keys, or UIDs;
+- MUST contain no personal data;
+- SHOULD represent a realistic deployment pattern useful to others;
+- SHOULD be clearly marked with its anonymisation status.
+
+The maintainer may decline an example submission if anonymisation appears incomplete or if the content does not add illustrative value beyond existing examples.
+
+Deployment configurations used in production MUST NOT be submitted to this repository, even in modified form, unless they have been fully anonymised.
+
+## 14. Practical contribution notes
 
 Prefer small, reviewable pull requests.
 
@@ -222,7 +238,7 @@ When in doubt:
 - keep descriptive text and implementation artifacts aligned
 - make explicit whether a file is Proposed or frozen
 
-## 14. Final note
+## 15. Final note
 
 The project values clarity, explicit boundaries, and reproducible structure.
 
