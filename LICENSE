@@ -3,6 +3,7 @@ Codename Domodossola Repository Licensing Notice
 This repository contains material under multiple licenses.
 
 Documentation:
+- /
 - /docs
 License:
 - CC BY-SA 4.0
@@ -19,4 +20,9 @@ License:
 
 Unless explicitly stated otherwise, licenses apply recursively within their respective directories.
 
-See the LICENSE file inside each subdirectory for the complete license text.
+This file defines license scope within the repository.
+
+The complete license texts are provided in:
+- /docs/LICENSE
+- /software/LICENSE
+- /hardware/LICENSE

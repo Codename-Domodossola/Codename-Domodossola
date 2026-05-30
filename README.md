@@ -37,9 +37,11 @@ This repository contains:
 
 - `/docs`
   - system specification documents
-  - technology catalog entries
-  - node implementation catalog entries
+  - technology catalog
+  - node implementation catalog
   - reference documents
+  - `TECH_ID/` technology catalog entries
+  - `NODE_IMP/` node implementation catalog entries
   - `examples/` — non-normative illustrative deployment material
   - `notes/` — working notes and tooling instructions
 
