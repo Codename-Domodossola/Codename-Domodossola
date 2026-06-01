@@ -63,7 +63,7 @@ MUST result in a different `MAGIC` value and therefore defines a different proto
 
 ## 2.3 Lifecycle
 All `TECH_ID`s and `NODE_IMP`s MUST be assigned exactly one lifecycle state:
-- **Proposed** — development-stage definitions not yet admitted to the official catalog; MUST use temporary identifiers as defined in Annex A; MAY change or be removed without stability guarantees;
+- **Proposed** — development-stage definitions not yet admitted to the official catalog; MUST use temporary identifiers as defined in Annex A; MAY change or be removed without stability guarantees; MUST NOT be relied upon for interoperability between deployments;
 - **Experimental** — officially admitted to the catalog and intended for broader review and testing; MUST be assigned immutable identifiers; MAY change or be removed without stability guarantees;
 - **Active** — approved for deployment and intended for general use;
 - **Legacy** — SHOULD NOT be newly deployed; existing use MAY continue and SHOULD be supported by Active implementations;
