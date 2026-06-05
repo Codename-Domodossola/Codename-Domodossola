@@ -1,6 +1,6 @@
 # Codename Domodossola Core Specification 
 ## Version 1.0 — alpha 1
-## updated: 2026-05-17 20:08
+## updated: 2026-06-05 09:41
 
 # 0. Document Conventions
 ## 0.1 Normative Language
@@ -88,7 +88,7 @@ A packet is the transmission unit.
 A packet contains:
 - MAGIC (3 bytes)
 - FLAGS (1 byte)
-- TOTAL_LENGTH (2 bytes)
+- TOTAL_LENGTH (2 bytes, big-endian uint16)
 - ORIGIN_UID (8 bytes, present if FLAGS bit 0 is set)
 - DEST_UID (8 bytes, present if FLAGS bit 1 is set)
 - CRYPTO_AUX (suite-defined, nonce or other auxiliary crypto metadata)

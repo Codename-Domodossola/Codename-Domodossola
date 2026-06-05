@@ -1,7 +1,7 @@
 # Codename Domodossola Core Specifications Annex A:
 # Subordinate Documents Specification
 ## Version 1.0 — alpha 1
-## updated: 2026-05-17 20:25
+## updated: 2026-06-05 09:52
 
 ---
 
@@ -221,6 +221,8 @@ For each catalog item, the normative definition consists of:
 - all referenced implementation artifacts applicable to that item.
 
 Where item-specific definitions conflict with shared catalog entry definitions, the item-specific definitions take precedence for that catalog item.
+
+Each `TECH_ID` entry MUST explicitly define the byte order of any  multi-byte integer fields it introduces, in any context where byte order is not otherwise determined by an external standard governing that interface.
 
 ---
 
