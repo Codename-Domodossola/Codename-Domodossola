@@ -87,7 +87,7 @@ Identity MUST NOT imply authority.
 A packet is the transmission unit.
 A packet contains:
 - MAGIC (3 bytes)
-- FLAGS (1 byte)
+- FLAGS (1 byte, LSB-first)
 - TOTAL_LENGTH (2 bytes, big-endian uint16)
 - ORIGIN_UID (8 bytes, present if FLAGS bit 0 is set)
 - DEST_UID (8 bytes, present if FLAGS bit 1 is set)
