@@ -40,17 +40,19 @@ Contributors MUST NOT:
 - allocate official identifiers for themselves
 - introduce vendor-private identifier ranges
 - reserve unofficial namespace blocks for future use
-- represent temporary local identifiers as official catalog entries
+- represent temporary local identifiers as official catalog items
 
-## 4. Proposed entries and temporary identifiers
+## 4. Proposed items and temporary identifiers
 
-During design and implementation work, contributors may create **Proposed** entries to allow a bundle of technologies and node implementations to interact before formal review.
+During design and implementation work, contributors may create **Proposed** items to allow a bundle of technologies and node implementations to interact before formal review.
 
-A Proposed entry is:
+A Proposed item is:
 - development-stage
 - not yet admitted to the official catalog
 - subject to change
 - intended for local testing and review
+
+A Proposed item MAY be accompanied by proposed modifications to the normative documents, which MUST be explicitly identified and declared as a dependency of the submission. Such item MAY operate under its declared proposed spec modifications; this is not a violation provided the dependency is explicitly declared.
 
 Temporary identifiers for Proposed entries MUST use the `0xFFXXXX` range, where `XXXX` corresponds to the proposed official identifier’s first four nibbles.
 
@@ -74,24 +76,26 @@ The lifecycle is:
 - Retired
 
 ### Proposed
-Proposed entries are development-stage definitions not yet admitted to the official catalog. They use temporary identifiers in the `0xFFXXXX` range.
+Proposed items are development-stage definitions not yet admitted to the official catalog. They use temporary identifiers in the `0xFFXXXX` range.
 
 ### Experimental
-Experimental entries are officially admitted to the catalog but MAY change or be removed without stability guarantees.
+Experimental items are officially admitted to the catalog but MAY change or be removed without stability guarantees.
 
 ### Active
-Active entries are approved for deployment and intended for general use.
+Active items are approved for deployment and intended for general use.
 
 ### Legacy
-Legacy entries SHOULD NOT be newly deployed; existing use MAY continue and SHOULD be supported by Active implementations.
+Legacy items SHOULD NOT be newly deployed; existing use MAY continue and SHOULD be supported by Active implementations.
 
 ### Retired
-Retired entries MUST NOT be newly deployed; existing instances SHOULD be decommissioned or updated.
+Retired items MUST NOT be newly deployed; existing instances SHOULD be decommissioned or updated.
 
-Once an entry exits Experimental status:
+Once an item exits Experimental status:
 - its definition is frozen
 - material changes require a new identifier
 - the previous identifier remains immutable
+
+If a spec modification renders an Active item non-compliant, the relevant item will be demoted to Legacy or Retired.
 
 A material change includes, for example:
 - behavior
@@ -104,11 +108,11 @@ A material change includes, for example:
 - attribute bindings
 - reproducibility fingerprint
 
-## 6. Immutable entries and bug fixes
+## 6. Immutable items and bug fixes
 
 Once a `TECH_ID` or `NODE_IMP` exits the Experimental lifecycle state, its technical definition is frozen.
 
-Bug fixes, behavioral changes, implementation replacements, or compatibility corrections for frozen entries MUST be implemented through allocation of a new identifier rather than through modification of the existing entry.
+Bug fixes, behavioral changes, implementation replacements, or compatibility corrections for frozen items MUST be implemented through allocation of a new identifier rather than through modification of the existing item.
 
 GitHub Issues SHOULD be used to track:
 - defects
@@ -123,7 +127,7 @@ A correction workflow will typically:
 3. review and allocate an official identifier;
 4. transition the previous identifier to Legacy or Retired if appropriate.
 
-Lifecycle transitions do not modify the technical definition of an entry.
+Lifecycle transitions do not modify the technical definition of an item.
 
 ## 7. What to submit
 
@@ -162,6 +166,10 @@ During review, maintainers may:
 - request catalog restructuring
 
 Do not assume that a proposal will keep its temporary names or its original structure.
+
+If a contribution bundles catalog items with proposed modifications to normative documents (specification text, allocation tables, lifecycle rules), the spec modifications MUST be submitted as a separate pull request. The catalog item pull request MUST reference the spec modification pull request and declare the dependency explicitly.
+
+The maintainer may admit catalog items to Experimental status while the associated spec modification pull request remains open. The catalog items will not exit Experimental status until the associated spec modification is resolved.
 
 ## 9. Review criteria
 

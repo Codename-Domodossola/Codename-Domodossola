@@ -29,7 +29,7 @@ Catalog items contained in the same catalog entry MUST be strictly related. In p
 - differ only by version, parameterization, capacity, revision, or similarly bounded variation
 
 Each catalog item MUST have:
-- a unique `TECH_ID` or `NODE_IMP`
+- a `TECH_ID` or `NODE_IMP` that is unique within the relevant catalog 
 - exactly one lifecycle state (§2.3)
 
 Each catalog item:

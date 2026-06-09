@@ -1,6 +1,6 @@
 # Codename Domodossola Core Specification 
 ## Version 1.0 — alpha 1
-## updated: 2026-06-05 09:41
+## updated: 2026-06-07 10:52
 
 # 0. Document Conventions
 ## 0.1 Normative Language
@@ -63,14 +63,18 @@ MUST result in a different `MAGIC` value and therefore defines a different proto
 
 ## 2.3 Lifecycle
 All `TECH_ID`s and `NODE_IMP`s MUST be assigned exactly one lifecycle state:
-- **Proposed** — development-stage definitions not yet admitted to the official catalog; MUST use temporary identifiers as defined in Annex A; MAY change or be removed without stability guarantees; MUST NOT be relied upon for interoperability between deployments;
-- **Experimental** — officially admitted to the catalog and intended for broader review and testing; MUST be assigned immutable identifiers; MAY change or be removed without stability guarantees;
-- **Active** — approved for deployment and intended for general use;
-- **Legacy** — SHOULD NOT be newly deployed; existing use MAY continue and SHOULD be supported by Active implementations;
+
+- **Proposed** — development-stage definitions not yet admitted to the official catalog; MUST use temporary identifiers as defined in Annex A; MAY change or be removed without stability guarantees; MUST NOT be relied upon for interoperability between deployments; MAY operate under explicitly proposed spec modifications.
+- **Experimental** — officially admitted to the catalog and intended for broader review and testing; MUST be assigned immutable identifiers; MAY change or be removed without stability guarantees; MAY operate under explicitly proposed spec modifications.
+- **Active** — approved for deployment and intended for general use; MUST be fully conformant with the current normative documents.
+- **Legacy** — SHOULD NOT be newly deployed; existing use MAY continue and SHOULD be supported by Active implementations.
 - **Retired** — MUST NOT be newly deployed; existing instances SHOULD be decommissioned or updated.
 
+If a confirmed spec modification renders an Active item non-conformant, the item MUST be demoted to Legacy or Retired.
+
 Lifecycle state is a catalog-level concept and MUST NOT influence runtime behavior or be inferred or modified by system operation.
-Each `TECH_ID` and each `NODE_IMP` becomes immutable once it exits the `Experimental` lifecycle state. After this point:
+
+Each `TECH_ID` and each `NODE_IMP` becomes immutable once it exits the Experimental lifecycle state. After this point:
 - it MUST NOT be modified;
 - it MUST NOT be removed;
 - new `TECH_ID`s and `NODE_IMP`s MAY be added.
