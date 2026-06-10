@@ -1,4 +1,4 @@
-# Codename Domodossola Deployment Configuration
+# Codename Domodossola Deployment Configuration 
 # TP
 ## status: fast track — pending GUARDIAN review
 ## updated: 2026-06-06 10:03
