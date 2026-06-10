@@ -13,7 +13,7 @@
 # =============================================================================
 
 # GitHub repo URL (HTTPS, with credentials already configured via git credential store)
-REPO_URL="https://github.com/YOUR_USER/YOUR_REPO.git"
+REPO_URL="https://github.com/Codename_Domodossola/Codename_Domodossola.git"
 
 # API backend base URL.
 # Anthropic official:  https://api.anthropic.com
