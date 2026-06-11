@@ -1,0 +1,11 @@
+# Notes
+
+## TP monotonic counter trust-level clarification
+
+The TP deployment requirements intentionally do not assign a trust level to the
+monotonic counter epoch. The counter value is internal replay/counter state that
+changes through firmware execution rather than through administrative action or a
+hardcoded value. Before implementation, the Core Specification should clarify how
+trust levels apply to internal replay/counter state that is not a TECH_ID
+configuration attribute, registry field, Exposed Variable, Assignable Variable,
+or Semantic Value.
