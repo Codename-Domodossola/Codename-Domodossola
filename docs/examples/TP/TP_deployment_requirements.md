@@ -1,6 +1,7 @@
 # Codename Domodossola Deployment Requirements 
 # TP
 ## status: fast track — pending GUARDIAN review
+## `MAGIC = 0xC3D94F`
 ## updated: 2026-06-06 10:03
 
 ---
@@ -220,8 +221,8 @@ The node requires non-volatile storage (internal EEPROM) for:
   interval): **L0** — written via ISP at manufacturing, immutable at runtime,
   consistent with Core Specification §4.1 ("defined at manufacturing or compilation
   time").
-- The monotonic counter epoch: **L2** — written autonomously by firmware at boot
-  and at counter wrap, persisted to EEPROM to survive reboots.
+- The monotonic counter epoch: written autonomously by firmware at boot and at
+  counter wrap, persisted to EEPROM to survive reboots.
 
 No other persistent storage is currently required.
 
@@ -528,12 +529,28 @@ Proposed TECH_ID `0xFF7001` defines a generic positional uint8 array construct:
 - Wire format: `[TECH_ID 3B][value_0 1B][value_1 1B]...[value_n-1 1B]`
 - n, scaling parameters, and position-to-variable mappings are defined by NODE_IMP.
 
-Telemetry node mapping:
+TECH_ID-level value encoding convention:
+- Attribute: minimum representable value (`min_value`).
+- Attribute: resolution (`resolution_per_lsb`).
+- Derived maximum representable value: `max_value = min_value + 252 * resolution_per_lsb`.
+- Encoded value `0`: error / NaN.
+- Encoded value `1`: below `min_value`.
+- Encoded values `2` through `254`: in-range values, where
+  `physical_value = min_value + (encoded - 2) * resolution_per_lsb`.
+- Encoded value `255`: above `max_value`.
+- Below-range and above-range classification is evaluated before in-range rounding.
+
+Telemetry NODE_IMP mapping:
 - n = 1
-- Position 0: DS18B20 temperature reading
-- Range: [-2°C, 125°C]
-- Encoding: `uint8 = (T + 2) * 2`
-- Resolution: 0.5°C per LSB
+- Position 0: DS18B20 temperature reading.
+- The physical quantity and unit are defined by the NODE_IMP as degrees Celsius.
+- `min_value = -10°C`, bound at L0 by the NODE_IMP.
+- `resolution_per_lsb = 0.5°C`, bound at L0 by the NODE_IMP.
+- Derived inclusive range: [-10°C, 116°C].
+- In-range encoding: `uint8 = 2 + round((T_celsius - min_value) / resolution_per_lsb)`.
+- Selection rationale: covers sub-zero antifreeze-water measurements and normal
+  liquid-water heating with margin above 100°C while using all in-range codes at
+  0.5°C resolution.
 
 ## 5.4 Replay Protection Detail
 
