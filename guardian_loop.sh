@@ -14,10 +14,16 @@
 REPO_URL="git@github.com:Codename-Domodossola/Codename-Domodossola.git"
 API_BASE="https://api.anthropic.com"
 GUARDIAN_MODEL="claude-sonnet-4-6"
-META_MODEL="claude-sonnet-4-6"
+META_MODEL="claude-fable-5"
 GUARDIAN_MAX_TOKENS=16000
 META_MAX_TOKENS=16000
 MAX_ROUNDS=20
+
+# Normative knowledge source.
+# Set BUNDLE_FILE to use the full repo bundle instead of individual spec files.
+# Path is relative to CLONE_DIR, or absolute.
+# Example: BUNDLE_FILE="bundle-20260611-233352.txt"
+BUNDLE_FILE=""
 
 GIT_AUTHOR_NAME="guardian-loop"
 GIT_AUTHOR_EMAIL="guardian@domodossola"
@@ -32,6 +38,7 @@ META_MODEL="${META_MODEL_OVERRIDE:-$META_MODEL}"
 GUARDIAN_MAX_TOKENS="${GUARDIAN_MAX_TOKENS_OVERRIDE:-$GUARDIAN_MAX_TOKENS}"
 META_MAX_TOKENS="${META_MAX_TOKENS_OVERRIDE:-$META_MAX_TOKENS}"
 MAX_ROUNDS="${MAX_ROUNDS_OVERRIDE:-$MAX_ROUNDS}"
+BUNDLE_FILE="${BUNDLE_FILE_OVERRIDE:-$BUNDLE_FILE}"
 REPO_URL="${REPO_URL_OVERRIDE:-$REPO_URL}"
 
 # ---------------------------------------------------------------------------
@@ -126,6 +133,19 @@ CORE_SPEC="$CLONE_DIR/docs/1-Codename_Domodossola_Core_Specifications_1.0a1.md"
 ANNEX_A="$CLONE_DIR/docs/2-Codename_Domodossola_C_S_Annex_A-Subordinate_documents_1.0a1.md"
 CONTRIBUTING="$CLONE_DIR/CONTRIBUTING"
 
+# Resolve bundle path (relative to CLONE_DIR if not absolute)
+if [ -n "$BUNDLE_FILE" ]; then
+    case "$BUNDLE_FILE" in
+        /*) BUNDLE_PATH="$BUNDLE_FILE" ;;
+        *)  BUNDLE_PATH="$CLONE_DIR/$BUNDLE_FILE" ;;
+    esac
+    if [ ! -f "$BUNDLE_PATH" ]; then
+        printf "Error: BUNDLE_FILE not found: %s
+" "$BUNDLE_PATH"
+        exit 1
+    fi
+fi
+
 # ---------------------------------------------------------------------------
 # API helper
 # ---------------------------------------------------------------------------
@@ -169,44 +189,40 @@ call_claude() {
 # ---------------------------------------------------------------------------
 
 build_guardian_user() {
-    printf "Evaluate the following artifact for compliance.\n\n"
-    printf "## Core Specification\n\n";    cat "$CORE_SPEC"
-    printf "\n\n## Annex A\n\n";           cat "$ANNEX_A"
-    printf "\n\n## CONTRIBUTING\n\n";      cat "$CONTRIBUTING"
-    printf "\n\n## Artifact under review\n\n"; cat "$ARTIFACT_FILE"
+    printf "## Normative knowledge\n\n"
+    if [ -n "$BUNDLE_FILE" ]; then
+        cat "$BUNDLE_PATH"
+    else
+        printf "### Core Specification\n\n"; cat "$CORE_SPEC"
+        printf "\n\n### Annex A\n\n";      cat "$ANNEX_A"
+        printf "\n\n### CONTRIBUTING\n\n"; cat "$CONTRIBUTING"
+    fi
+    printf "\n\n## Artifact under review\n\n"
+    cat "$ARTIFACT_FILE"
+    printf "\n\n---\n\n"
+    printf "Evaluate the artifact under review.\n"
 }
 
 build_meta1_user() {
-    # Phase 1: analysis only, no diff
     guardian_response="$1"
-    printf "## Core Specification\n\n";    cat "$CORE_SPEC"
-    printf "\n\n## Annex A\n\n";           cat "$ANNEX_A"
-    printf "\n\n## CONTRIBUTING\n\n";      cat "$CONTRIBUTING"
-    printf "\n\n## Artifact under review\n\n"; cat "$ARTIFACT_FILE"
-    printf "\n\n## GUARDIAN response\n\n"; cat "$guardian_response"
-    printf "\n\n## Meta-evaluator context\n\n"; cat "$META_CONTEXT"
+    printf "## Normative knowledge\n\n"
+    if [ -n "$BUNDLE_FILE" ]; then
+        cat "$BUNDLE_PATH"
+    else
+        printf "### Core Specification\n\n"; cat "$CORE_SPEC"
+        printf "\n\n### Annex A\n\n";        cat "$ANNEX_A"
+        printf "\n\n### CONTRIBUTING\n\n";   cat "$CONTRIBUTING"
+    fi
+    printf "\n\n## Current GUARDIAN system prompt\n\n"
+    cat "$GUARDIAN_PROMPT"
+    printf "\n\n## Artifact under review\n\n"
+    cat "$ARTIFACT_FILE"
+    printf "\n\n## GUARDIAN response\n\n"
+    cat "$guardian_response"
+    printf "\n\n## Meta-evaluator context\n\n"
+    cat "$META_CONTEXT"
     printf "\n\n---\n\n"
-    printf "Analyse each GUARDIAN finding. For each one:\n"
-    printf "1. State whether it is a TRUE_POSITIVE or FALSE_POSITIVE, with reasoning.\n"
-    printf "2. For TRUE_POSITIVE: state suggested target (artifact | spec).\n"
-    printf "3. For FALSE_POSITIVE: explain why.\n\n"
-    printf "Then output a structured summary in this exact format:\n\n"
-    printf "ANALYSIS\n"
-    printf "finding_id: <id>\n"
-    printf "verdict: TRUE_POSITIVE | FALSE_POSITIVE\n"
-    printf "target: artifact | spec | n/a\n"
-    printf "reason: <one line>\n"
-    printf "---\n"
-    printf "(repeat for each finding)\n\n"
-    printf "SUMMARY\n"
-    printf "true_positives: <count>\n"
-    printf "false_positives: <count>\n"
-    printf "uncertain: <count>\n\n"
-    printf "Rules:\n"
-    printf "- Do NOT propose diffs in this phase.\n"
-    printf "- Do NOT reference specific concrete errors in the artifact when reasoning\n"
-    printf "  about guardian behaviour — reason about general behavioural patterns only.\n"
-    printf "- If you are not certain about a finding, mark it uncertain and explain.\n"
+    printf "Analyse the GUARDIAN response.\n"
 }
 
 build_meta2_user() {
@@ -305,10 +321,55 @@ log_round() {
 }
 
 # ---------------------------------------------------------------------------
+# save_session_synthesis — append meta synthesis to meta_context.md
+# ---------------------------------------------------------------------------
+
+save_session_synthesis() {
+    outcome="$1"      # ACCEPTED | ESCALATE | MAX_ROUNDS
+    user_notes="$2"   # may be empty
+
+    printf "\n\nRunning META (session synthesis)...\n"
+
+    # Build synthesis request
+    {
+        printf "## Meta-evaluator context so far\n\n"
+        cat "$META_CONTEXT"
+        printf "\n\n## Session log\n\n"
+        ls "$LOG_DIR"/round_*/meta1_response.txt 2>/dev/null | while read f; do
+            round_label=$(basename "$(dirname "$f")")
+            printf "### %s\n\n" "$round_label"
+            cat "$f"
+            printf "\n\n"
+        done
+        printf "## Session outcome: %s\n\n" "$outcome"
+        if [ -n "$user_notes" ]; then
+            printf "## User notes\n\n%s\n\n" "$user_notes"
+        fi
+        printf "---\n\n"
+        printf "Produce a SESSION SYNTHESIS for the meta context.\n"
+        printf "Follow the format defined in your instructions.\n"
+    } > "$WORK_DIR/synthesis_user.txt"
+
+    call_claude         "$WORK_DIR/meta_system.txt"         "$WORK_DIR/synthesis_user.txt"         "$META_MODEL"         "$META_MAX_TOKENS" > "$WORK_DIR/synthesis_response.txt"
+
+    printf "\n%s\n" "--- Session synthesis ---"
+    cat "$WORK_DIR/synthesis_response.txt"
+
+    # Append to meta_context
+    printf "\n\n" >> "$META_CONTEXT"
+    cat "$WORK_DIR/synthesis_response.txt" >> "$META_CONTEXT"
+    printf "\nSynthesis appended to meta_context.md\n"
+}
+
+# ---------------------------------------------------------------------------
 # handle_accepted
 # ---------------------------------------------------------------------------
 
 handle_accepted() {
+    printf "\nCollect any notes for the session synthesis (Enter to skip): "
+    read _synth_notes
+    save_session_synthesis "ACCEPTED" "$_synth_notes"
+
     printf "\n✅ ACCEPTED — all findings resolved.\n\n"
     git_commit "round $(printf '%02d' "$round"): ACCEPTED"
 
@@ -533,4 +594,68 @@ while [ "$round" -lt "$MAX_ROUNDS" ]; do
                         ;;
                 esac
             done
-    
+            ;;
+
+        # --------------------------------------------------------------
+        [Ee])
+            printf "\nPause — edit files in:\n"
+            printf "  Artifact/spec: %s\n" "$CLONE_DIR"
+            printf "  (use Markor or any editor)\n"
+            printf "Press Enter when done: "
+            read _
+            printf "Reloading and re-running from GUARDIAN...\n"
+            skip_guardian=0
+            ;;
+
+        # --------------------------------------------------------------
+        [Rr])
+            printf "Add notes for meta context (press Enter twice when done):\n"
+            notes=""
+            while IFS= read -r line; do
+                [ -z "$line" ] && break
+                notes="${notes}${line}\n"
+            done
+            if [ -n "$notes" ]; then
+                # Append notes + brief analysis summary to meta_context
+                printf "\n\n### Session %s — Round %d\n\n" \
+                    "$SESSION_TS" "$round"          >> "$META_CONTEXT"
+                printf "%b" "$notes"                >> "$META_CONTEXT"
+                printf "\nSummary: TP=%s FP=%s Uncertain=%s\n" \
+                    "$n_tp" "$n_fp" "$n_uc"         >> "$META_CONTEXT"
+            fi
+            printf "Re-running META with updated context...\n"
+            skip_guardian=1
+            ;;
+
+        # --------------------------------------------------------------
+        [Aa])
+            if [ "$n_fp" -gt 0 ] && [ "$n_uc" -eq 0 ]; then
+                printf "\nStarting AUTO mode.\n"
+                printf "Recording initial finding sets...\n"
+                tp_initial=$(grep -B1 "^verdict: TRUE_POSITIVE" \
+                    "$WORK_DIR/meta1_response.txt" \
+                    | grep "^finding_id:" | awk '{print $2}' \
+                    | tr '\n' ' ')
+                fp_initial=$(grep -B1 "^verdict: FALSE_POSITIVE" \
+                    "$WORK_DIR/meta1_response.txt" \
+                    | grep "^finding_id:" | awk '{print $2}' \
+                    | tr '\n' ' ')
+                printf "TP to preserve: %s\n" "$tp_initial"
+                printf "FP to eliminate: %s\n" "$fp_initial"
+                auto_mode=1
+            else
+                printf "AUTO requires FP > 0 and Uncertain = 0.\n"
+            fi
+            ;;
+
+        *)
+            printf "Unknown choice — please enter d, e, r%s.\n" \
+                "$([ "$n_fp" -gt 0 ] && [ "$n_uc" -eq 0 ] && printf ', a' || true)"
+            ;;
+    esac
+
+done
+
+save_session_synthesis "MAX_ROUNDS" ""
+printf "\nMax rounds (%d) reached without acceptance.\n" "$MAX_ROUNDS"
+exit 1
