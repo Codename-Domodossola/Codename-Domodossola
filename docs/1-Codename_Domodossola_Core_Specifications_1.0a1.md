@@ -205,7 +205,7 @@ Each attribute MUST be assigned exactly one Trust Level (L0, L1, L2) as defined 
 - Trust Levels are assigned by `NODE_IMP`;
 - `NODE_IMP` MAY restrict Trust Levels constraints defined by `TECH_ID`s;
 - `NODE_IMP` MUST NOT relax Trust Level constraints defined by `TECH_ID`s.
-Attributes affecting authentication, authorization, or interpretation of L2 data MUST NOT be assigned L2 — Runtime Trust Level.
+Attributes governing or configuring authentication, authorization, or interpretation of L2 data MUST NOT be assigned L2 — Runtime Trust Level.
 
 ## 4.3 TECH_ID Composition
 A node is defined as a composition of `TECH_ID`s constrained by its `NODE_IMP`.
