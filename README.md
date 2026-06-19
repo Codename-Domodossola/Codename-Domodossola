@@ -43,7 +43,6 @@ This repository contains:
   - `TECH_ID/` technology catalog entries
   - `NODE_IMP/` node implementation catalog entries
   - `examples/` — non-normative illustrative deployment material
-  - `notes/` — working notes and tooling instructions
 
 - `/software`
   - firmware implementations
