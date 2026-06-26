@@ -104,16 +104,18 @@ This structure has no runtime meaning.
 0x14XXXX  Debug / programming
 0x15XXXX  FPGA / programmable logic
 0x16XXXX  Power / energy
-0x17XXXX–0x1FXXXX  Reserved
+0x17XXXX  Firmware update / provisioning / lifecycle (OTA)
+0x18XXXX–0x1FXXXX  Reserved
 
 0x2XXXXX  Communication / transport
-0x20XXXX  Radio communication
-0x21XXXX  Wired communication
-0x22XXXX  Link / framing
-0x23XXXX  Routing / relay / mesh
-0x24XXXX  Gateway / bridge communication
-0x25XXXX  Transport integrity
-0x26XXXX–0x2FXXXX  Reserved
+0x20XXXX  Packet encoding / decoding
+0x21XXXX  Radio communication
+0x22XXXX  Wired communication
+0x23XXXX  Link / framing
+0x24XXXX  Routing / relay / mesh
+0x25XXXX  Gateway / bridge communication
+0x26XXXX  Transport integrity
+0x27XXXX–0x2FXXXX  Reserved
 
 0x3XXXXX  Sensors
 0x30XXXX  Environmental sensing
@@ -137,21 +139,23 @@ This structure has no runtime meaning.
 0x47XXXX–0x4FXXXX  Reserved
 
 0x5XXXXX  Storage, persistence & state
-0x50XXXX  Non-volatile storage / databases
-0x51XXXX  Runtime persistence
-0x52XXXX  Serialization / encoding
-0x53XXXX  Registry / state management
+0x50XXXX  Node Registries (as per §6,2)
+0x51XXXX  Non-volatile storage / databases
+0x52XXXX  Runtime persistence / state management
+0x53XXXX  Serialization / encoding
 0x54XXXX  Event indexing / timebases
 0x55XXXX  Secure storage
 0x56XXXX–0x5FXXXX  Reserved
 
 0x6XXXXX  Cryptography
-0x60XXXX  Encryption
-0x61XXXX  Authentication
-0x62XXXX  Cryptographic suites
-0x63XXXX  Random / entropy generation
-0x64XXXX  Secure elements / TPM
-0x65XXXX–0x6FXXXX  Reserved
+0x60XXXX  Cryptographic suites
+0x61XXXX  Authentication / MAC
+0x62XXXX  Encryption
+0x63XXXX  Key derivation (KDF)
+0x64XXXX  Random / entropy generation
+0x65XXXX  Hashing
+0x66XXXX  Secure elements / TPM
+0x67XXXX–0x6FXXXX  Reserved
 
 0x7XXXXX  Construct processing
 0x70XXXX  Semantic encoding / decoding
