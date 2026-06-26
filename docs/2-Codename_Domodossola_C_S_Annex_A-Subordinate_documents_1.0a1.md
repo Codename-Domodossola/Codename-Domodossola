@@ -40,6 +40,10 @@ A catalog entry MAY include common sections shared by multiple catalog items, bu
 
 Proposed catalog items are development-stage definitions not yet admitted to the official catalog. Temporary identifiers for Proposed items MUST use the `0xFFXXXX` range, where `XXXX` corresponds to the proposed official identifier’s first four nibbles.
 
+An identifier is only meaningful together with its namespace. `TECH_ID` and `NODE_IMP` are parallel namespaces; equal numeric values in different namespaces are unrelated and never constitute a collision.
+
+In all human-facing text (specs, catalog entries, code identifiers/comments, commit messages) every identifier MUST be class-qualified with a sigil: `T:` for `TECH_ID`, `N:` for `NODE_IMP` (e.g. `T:0xFF7001`, `N:0xFF1001`). Bare `0x…` identifiers are not permitted in such text.
+
 New catalog items MAY be added without changing `MAGIC`, provided existing immutable items remain unchanged.
 
 Defect correction, behavioral modification, or implementation replacement for an immutable `TECH_ID` or `NODE_IMP` MUST be performed through allocation of a new identifier.
