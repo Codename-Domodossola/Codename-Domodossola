@@ -94,120 +94,120 @@ This structure has no runtime meaning.
 ## A.1.2 TECH_ID Allocation Table (First 8 Bits)
 
 ``` DRAFT - to be frozen after experimentation
-0x0XXXXX  INVALID / NULL (MUST NOT be used)
+T:0x0XXXXX  INVALID / NULL (MUST NOT be used)
 
-0x1XXXXX  Execution substrate
-0x10XXXX  MCU / SoC + runtime bundles
-0x11XXXX  Bootloaders / initialization
-0x12XXXX  Execution environments / schedulers
-0x13XXXX  Peripheral interfaces
-0x14XXXX  Debug / programming
-0x15XXXX  FPGA / programmable logic
-0x16XXXX  Power / energy
-0x17XXXX  Firmware update / provisioning / lifecycle (OTA)
-0x18XXXX–0x1FXXXX  Reserved
+T:0x1XXXXX  Execution substrate
+T:0x10XXXX  MCU / SoC + runtime bundles
+T:0x11XXXX  Bootloaders / initialization
+T:0x12XXXX  Execution environments / schedulers
+T:0x13XXXX  Peripheral interfaces
+T:0x14XXXX  Debug / programming
+T:0x15XXXX  FPGA / programmable logic
+T:0x16XXXX  Power / energy
+T:0x17XXXX  Firmware update / provisioning / lifecycle (OTA)
+T:0x18XXXX–T:0x1FXXXX  Reserved
 
-0x2XXXXX  Communication / transport
-0x20XXXX  Packet encoding / decoding
-0x21XXXX  Radio communication
-0x22XXXX  Wired communication
-0x23XXXX  Link / framing
-0x24XXXX  Routing / relay / mesh
-0x25XXXX  Gateway / bridge communication
-0x26XXXX  Transport integrity
-0x27XXXX–0x2FXXXX  Reserved
+T:0x2XXXXX  Communication / transport
+T:0x20XXXX  Packet encoding / decoding
+T:0x21XXXX  Radio communication
+T:0x22XXXX  Wired communication
+T:0x23XXXX  Link / framing
+T:0x24XXXX  Routing / relay / mesh
+T:0x25XXXX  Gateway / bridge communication
+T:0x26XXXX  Transport integrity
+T:0x27XXXX–T:0x2FXXXX  Reserved
 
-0x3XXXXX  Sensors
-0x30XXXX  Environmental sensing
-0x31XXXX  Node motion/positioning sensing
-0x32XXXX  External motion/positioning sensing
-0x33XXXX  Optical sensing
-0x34XXXX  Electrical measurement
-0x35XXXX  Human input sensing
-0x36XXXX  Acquisition / conditioning
-0x37XXXX  Multi-sensor probes
-0x38XXXX–0x3FXXXX  Reserved
+T:0x3XXXXX  Sensors
+T:0x30XXXX  Environmental sensing
+T:0x31XXXX  Node motion/positioning sensing
+T:0x32XXXX  External motion/positioning sensing
+T:0x33XXXX  Optical sensing
+T:0x34XXXX  Electrical measurement
+T:0x35XXXX  Human input sensing
+T:0x36XXXX  Acquisition / conditioning
+T:0x37XXXX  Multi-sensor probes
+T:0x38XXXX–T:0x3FXXXX  Reserved
 
-0x4XXXXX  Actuation / output
-0x40XXXX  Displays
-0x41XXXX  Indicators / notifications
-0x42XXXX  Relay / switching
-0x43XXXX  Motor / motion control
-0x44XXXX  Analog output
-0x45XXXX  Safety interlocks
-0x46XXXX  Feedback / closed-loop actuation
-0x47XXXX–0x4FXXXX  Reserved
+T:0x4XXXXX  Actuation / output
+T:0x40XXXX  Displays
+T:0x41XXXX  Indicators / notifications
+T:0x42XXXX  Relay / switching
+T:0x43XXXX  Motor / motion control
+T:0x44XXXX  Analog output
+T:0x45XXXX  Safety interlocks
+T:0x46XXXX  Feedback / closed-loop actuation
+T:0x47XXXX–T:0x4FXXXX  Reserved
 
-0x5XXXXX  Storage, persistence & state
-0x50XXXX  Node Registries (as per §6,2)
-0x51XXXX  Non-volatile storage / databases
-0x52XXXX  Runtime persistence / state management
-0x53XXXX  Serialization / encoding
-0x54XXXX  Event indexing / timebases
-0x55XXXX  Secure storage
-0x56XXXX–0x5FXXXX  Reserved
+T:0x5XXXXX  Storage, persistence & state
+T:0x50XXXX  Node Registries (as per §6,2)
+T:0x51XXXX  Non-volatile storage / databases
+T:0x52XXXX  Runtime persistence / state management
+T:0x53XXXX  Serialization / encoding
+T:0x54XXXX  Event indexing / timebases
+T:0x55XXXX  Secure storage
+T:0x56XXXX–T:0x5FXXXX  Reserved
 
-0x6XXXXX  Cryptography
-0x60XXXX  Cryptographic suites
-0x61XXXX  Authentication / MAC
-0x62XXXX  Encryption
-0x63XXXX  Key derivation (KDF)
-0x64XXXX  Random / entropy generation
-0x65XXXX  Hashing
-0x66XXXX  Secure elements / TPM
-0x67XXXX–0x6FXXXX  Reserved
+T:0x6XXXXX  Cryptography
+T:0x60XXXX  Cryptographic suites
+T:0x61XXXX  Authentication / MAC
+T:0x62XXXX  Encryption
+T:0x63XXXX  Key derivation (KDF)
+T:0x64XXXX  Random / entropy generation
+T:0x65XXXX  Hashing
+T:0x66XXXX  Secure elements / TPM
+T:0x67XXXX–T:0x6FXXXX  Reserved
 
-0x7XXXXX  Construct processing
-0x70XXXX  Semantic encoding / decoding
-0x71XXXX  Semantic mapping / routing
-0x72XXXX  Transformations
-0x73XXXX  Compression
-0x74XXXX  Fragmentation
-0x75XXXX  Semantic requests
-0x76XXXX–0x7FXXXX  Reserved
+T:0x7XXXXX  Construct processing
+T:0x70XXXX  Semantic encoding / decoding
+T:0x71XXXX  Semantic mapping / routing
+T:0x72XXXX  Transformations
+T:0x73XXXX  Compression
+T:0x74XXXX  Fragmentation
+T:0x75XXXX  Semantic requests
+T:0x76XXXX–T:0x7FXXXX  Reserved
 
-0x8XXXXX  Rule & orchestration
-0x80XXXX  Rule evaluation
-0x81XXXX  Event dispatch / triggers
-0x82XXXX  Scheduling / orchestration
-0x83XXXX  Transmission control
-0x84XXXX  Calibration / discovery
-0x85XXXX–0x8FXXXX  Reserved
+T:0x8XXXXX  Rule & orchestration
+T:0x80XXXX  Rule evaluation
+T:0x81XXXX  Event dispatch / triggers
+T:0x82XXXX  Scheduling / orchestration
+T:0x83XXXX  Transmission control
+T:0x84XXXX  Calibration / discovery
+T:0x85XXXX–T:0x8FXXXX  Reserved
 
-0x9XXXXX  Translation & interoperability
-0x90XXXX  Protocol translation
-0x91XXXX  Foreign protocol bridges
-0x92XXXX  Semantic translation
-0x93XXXX–0x9FXXXX  Reserved
+T:0x9XXXXX  Translation & interoperability
+T:0x90XXXX  Protocol translation
+T:0x91XXXX  Foreign protocol bridges
+T:0x92XXXX  Semantic translation
+T:0x93XXXX–T:0x9FXXXX  Reserved
 
-0xAXXXXX  UI & interaction
-0xA0XXXX  Human interfaces
-0xA1XXXX  Dashboards / presentation
-0xA2XXXX  Alert / notification presentation
-0xA3XXXX  Interactive configuration
-0xA4XXXX–0xAFXXXX  Reserved
+T:0xAXXXXX  UI & interaction
+T:0xA0XXXX  Human interfaces
+T:0xA1XXXX  Dashboards / presentation
+T:0xA2XXXX  Alert / notification presentation
+T:0xA3XXXX  Interactive configuration
+T:0xA4XXXX–T:0xAFXXXX  Reserved
 
-0xBXXXXX  Data processing algorithms
-0xB0XXXX  Statistical processing
-0xB1XXXX  Windowed aggregation
-0xB2XXXX  Filtering / smoothing
-0xB3XXXX  Physical simulation
-0xB4XXXX  Synthetic sensors
-0xB5XXXX  Machine learning
-0xB6XXXX  System emulation
-0xB7XXXX–0xBFXXXX  Reserved
+T:0xBXXXXX  Data processing algorithms
+T:0xB0XXXX  Statistical processing
+T:0xB1XXXX  Windowed aggregation
+T:0xB2XXXX  Filtering / smoothing
+T:0xB3XXXX  Physical simulation
+T:0xB4XXXX  Synthetic sensors
+T:0xB5XXXX  Machine learning
+T:0xB6XXXX  System emulation
+T:0xB7XXXX–T:0xBFXXXX  Reserved
 
-0xCXXXXX  Diagnostics & development
-0xC0XXXX  Logging / diagnostics
-0xC1XXXX  Debug instrumentation
-0xC2XXXX  Test harnesses
-0xC3XXXX  Compliance verification
-0xC4XXXX–0xCFXXXX  Reserved
+T:0xCXXXXX  Diagnostics & development
+T:0xC0XXXX  Logging / diagnostics
+T:0xC1XXXX  Debug instrumentation
+T:0xC2XXXX  Test harnesses
+T:0xC3XXXX  Compliance verification
+T:0xC4XXXX–T:0xCFXXXX  Reserved
 
-0xDXXXXX–0xEXXXXX  Reserved for future categories
+T:0xDXXXXX–T:0xEXXXXX  Reserved for future categories
 
-0xFXXXXX  Reserved (MUST NOT be used in the official catalog)
-0xFFXXXX  Proposed / temporary (MUST NOT be used in the official catalog)
+T:0xFXXXXX  Reserved (MUST NOT be used in the official catalog)
+T:0xFFXXXX  Proposed / temporary (MUST NOT be used in the official catalog)
 ```
 
 ---
@@ -415,68 +415,68 @@ This structure has no runtime meaning.
 ## A.2.2 NODE_IMP Allocation Table (First 8 Bits)
 
 ``` DRAFT - to be frozen after experimentation
-0x0XXXXX  INVALID / NULL (MUST NOT be used)
+N:0x0XXXXX  INVALID / NULL (MUST NOT be used)
 
-0x1XXXXX  Zero-configuration nodes
-0x10XXXX  Fixed sensing nodes
-0x11XXXX  Fixed actuation/control nodes
-0x12XXXX  Fixed display/indicator nodes
-0x13XXXX  Fixed relay/repeater nodes
-0x14XXXX  Fixed appliance/interface nodes
-0x15XXXX–0x1FXXXX  Reserved
+N:0x1XXXXX  Zero-configuration nodes
+N:0x10XXXX  Fixed sensing nodes
+N:0x11XXXX  Fixed actuation/control nodes
+N:0x12XXXX  Fixed display/indicator nodes
+N:0x13XXXX  Fixed relay/repeater nodes
+N:0x14XXXX  Fixed appliance/interface nodes
+N:0x15XXXX–N:0x1FXXXX  Reserved
 
-0x2XXXXX  Configurable field nodes
-0x20XXXX  Multi-sensor field nodes
-0x21XXXX  Multi-actuator field nodes
-0x22XXXX  Hybrid sensing/actuation nodes
-0x23XXXX  Portable/mobile field nodes
-0x24XXXX  Low-power / remote field nodes
-0x25XXXX–0x2FXXXX  Reserved
+N:0x2XXXXX  Configurable field nodes
+N:0x20XXXX  Multi-sensor field nodes
+N:0x21XXXX  Multi-actuator field nodes
+N:0x22XXXX  Hybrid sensing/actuation nodes
+N:0x23XXXX  Portable/mobile field nodes
+N:0x24XXXX  Low-power / remote field nodes
+N:0x25XXXX–N:0x2FXXXX  Reserved
 
-0x3XXXXX  Hub / Service Nodes
-0x30XXXX  Local aggregation hubs
-0x31XXXX  Dashboard / presentation hubs
-0x32XXXX  Provisioning / maintenance hubs
-0x33XXXX  Multi-service integrated hubs
-0x34XXXX  High-capacity infrastructure hubs
-0x35XXXX–0x3FXXXX  Reserved
+N:0x3XXXXX  Hub / Service Nodes
+N:0x30XXXX  Local aggregation hubs
+N:0x31XXXX  Dashboard / presentation hubs
+N:0x32XXXX  Provisioning / maintenance hubs
+N:0x33XXXX  Multi-service integrated hubs
+N:0x34XXXX  High-capacity infrastructure hubs
+N:0x35XXXX–N:0x3FXXXX  Reserved
 
-0x4XXXXX  External Integration Nodes
-0x40XXXX  Protocol bridge nodes
-0x41XXXX  External API / service gateways
-0x42XXXX  Industrial / machine integration nodes
-0x43XXXX  Legacy system integration nodes
-0x44XXXX  Multi-protocol translation nodes
-0x45XXXX–0x4FXXXX  Reserved
+N:0x4XXXXX  External Integration Nodes
+N:0x40XXXX  Protocol bridge nodes
+N:0x41XXXX  External API / service gateways
+N:0x42XXXX  Industrial / machine integration nodes
+N:0x43XXXX  Legacy system integration nodes
+N:0x44XXXX  Multi-protocol translation nodes
+N:0x45XXXX–N:0x4FXXXX  Reserved
 
-0x5XXXXX  Dedicated Interaction Nodes
-0x50XXXX  Passive display nodes
-0x51XXXX  Interactive UI nodes
-0x52XXXX  Rich dashboard / presentation systems
-0x53XXXX  Human control interface nodes
-0x54XXXX  Feedback / alerting nodes
-0x55XXXX–0x5FXXXX  Reserved
+N:0x5XXXXX  Dedicated Interaction Nodes
+N:0x50XXXX  Passive display nodes
+N:0x51XXXX  Interactive UI nodes
+N:0x52XXXX  Rich dashboard / presentation systems
+N:0x53XXXX  Human control interface nodes
+N:0x54XXXX  Feedback / alerting nodes
+N:0x55XXXX–N:0x5FXXXX  Reserved
 
-0x6XXXXX  Dedicated Actuation / Control Nodes
-0x60XXXX  Simple actuator nodes
-0x61XXXX  Closed-loop control nodes
-0x62XXXX  Safety-critical actuation nodes
-0x63XXXX  Coordinated multi-actuator systems
-0x64XXXX  Industrial control nodes
-0x65XXXX–0x6FXXXX  Reserved
+N:0x6XXXXX  Dedicated Actuation / Control Nodes
+N:0x60XXXX  Simple actuator nodes
+N:0x61XXXX  Closed-loop control nodes
+N:0x62XXXX  Safety-critical actuation nodes
+N:0x63XXXX  Coordinated multi-actuator systems
+N:0x64XXXX  Industrial control nodes
+N:0x65XXXX–N:0x6FXXXX  Reserved
 
-0x7XXXXX  Transport / Relay Infrastructure Nodes
-0x70XXXX  Single-transport relay nodes
-0x71XXXX  Multi-transport relay nodes
-0x72XXXX  Mesh / routing coordination nodes
-0x73XXXX  Transport bridge / gateway nodes
-0x74XXXX  Long-range transport infrastructure nodes
-0x75XXXX–0x7FXXXX  Reserved
+N:0x7XXXXX  Transport / Relay Infrastructure Nodes
+N:0x70XXXX  Single-transport relay nodes
+N:0x71XXXX  Multi-transport relay nodes
+N:0x72XXXX  Mesh / routing coordination nodes
+N:0x73XXXX  Transport bridge / gateway nodes
+N:0x74XXXX  Long-range transport infrastructure nodes
+N:0x75XXXX–N:0x7FXXXX  Reserved
 
-0x8XXXXX–0xEXXXXX  Reserved for future node classes
+N:0x8XXXXX–N:0xEXXXXX  Reserved for future node classes
 
-0xFXXXXX  Reserved (MUST NOT be used in the official catalog)
-0xFFXXXX  Proposed / temporary (MUST NOT be used in the official catalog)
+N:0xFXXXXX  Reserved (MUST NOT be used in the official catalog)
+N:0xFFXXXX  Proposed / temporary (MUST NOT be used in the official catalog)
 ```
 
 ---
