@@ -42,7 +42,9 @@ Proposed catalog items are development-stage definitions not yet admitted to the
 
 An identifier is only meaningful together with its namespace. `TECH_ID` and `NODE_IMP` are parallel namespaces; equal numeric values in different namespaces are unrelated and never constitute a collision.
 
-In all human-facing text (specs, catalog entries, code identifiers/comments, commit messages) every identifier MUST be class-qualified with a sigil: `T:` for `TECH_ID`, `N:` for `NODE_IMP` (e.g. `T:0xFF7001`, `N:0xFF1001`). Bare `0x…` identifiers are not permitted in such text.
+In all human-facing text (specs, catalog entries, code comments, commit messages) every `TECH_ID` and `NODE_IMP` value MUST be class-qualified with a sigil: `T:` for `TECH_ID`, `N:` for `NODE_IMP`. The MAGIC constant MUST appear in its canonical form `MAGIC = 0xC3D94F`. Bare `0x…` values are not permitted in such contexts.
+
+In source code, every `TECH_ID` and `NODE_IMP` value MUST be expressed through a constant or variable whose name strictly ends with `TECH_ID` or `NODE_IMP` respectively; bare `0x...` literals for catalog identifiers are permitted only in the definition of such a constant or variable. The MAGIC protocol discriminator MUST be named `MAGIC`.
 
 New catalog items MAY be added without changing `MAGIC`, provided existing immutable items remain unchanged.
 
